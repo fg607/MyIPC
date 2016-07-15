@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hardwork.fg607.myipc">
+
+    <permission
+        android:name="com.hardwork.fg607.myipc.ACCESS_BOOK_SERVICE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.hardwork.fg607.myipc.PROVIDER"
+        android:protectionLevel="normal" />
+
+    <uses-permission android:name="com.hardwork.fg607.myipc.ACCESS_BOOK_SERVICE" />
+    <uses-permission android:name="com.hardwork.fg607.myipc.PROVIDER" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".BookManagerActivity">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+
+        <service
+            android:name=".service.BookManagerService"
+            android:process=":remote" />
+
+        <provider
+            android:name=".contentprovider.BookProvider"
+            android:authorities="com.hardwork.fg607.myipc.provider"
+            android:permission="com.hardwork.fg607.myipc.PROVIDER"
+            android:process=":provider" />
+
+        <activity android:name=".ProviderActivity">
+          <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+
+        <service
+            android:name=".service.BinderPoolService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.hardwork.fg607.myipc.BINDER_POOL_SERVICE" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".BinderPoolActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
